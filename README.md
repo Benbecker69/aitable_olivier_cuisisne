@@ -1,51 +1,32 @@
 # Mon carnet de recettes
 
-Une application web simple pour parcourir, rechercher et gérer des recettes de cuisine, avec [Airtable](https://airtable.com) comme base de données.
+Une application web pour parcourir, rechercher et gérer des recettes de cuisine, avec [Airtable](https://airtable.com) comme base de données et [Next.js](https://nextjs.org) comme front-end.
 
-## Fonctionnalités
+- Accueil avec recherche par nom et filtre par catégorie (Entrée, Plat, Dessert)
+- Page détail d'une recette : photo, temps de préparation/cuisson, portions, difficulté, ingrédients avec quantités, instructions étape par étape
+- Création, modification et suppression de recettes depuis le site (photo comprise), protégées par un mot de passe
 
-- Liste des recettes avec recherche par nom et filtre par catégorie (Entrée, Plat, Dessert)
-- Page détail : photo, temps de préparation/cuisson, portions, difficulté, liste d'ingrédients avec quantités, instructions étape par étape
-- Création, modification et suppression de recettes depuis le site (photo comprise), protégées par un mot de passe simple
+## Documentation
+
+Toute la documentation détaillée du projet est dans le dossier [`doc/`](doc/) :
+
+| Fichier | Contenu |
+|---|---|
+| [`doc/01-demarrage.md`](doc/01-demarrage.md) | Installer et lancer le projet en local, étape par étape |
+| [`doc/02-airtable.md`](doc/02-airtable.md) | Comment accéder à la base Airtable et schéma complet des tables |
+| [`doc/03-architecture.md`](doc/03-architecture.md) | Stack technique, arborescence du code, comment l'app est construite |
+| [`doc/04-fonctionnalites.md`](doc/04-fonctionnalites.md) | Tour des fonctionnalités avec captures d'écran |
+
+**Pour une correction ou une prise en main rapide, commencer par `doc/01-demarrage.md`.**
+
+## Démarrage express
+
+```bash
+npm install
+# créer .env.local (voir doc/01-demarrage.md et doc/02-airtable.md)
+npm run dev
+```
 
 ## Stack technique
 
-- [Next.js](https://nextjs.org) (App Router) + TypeScript + [Tailwind CSS](https://tailwindcss.com)
-- [Airtable](https://airtable.com) comme base de données, via son API REST (pas de SDK)
-
-## Démarrer le projet
-
-1. Installer les dépendances :
-
-   ```bash
-   npm install
-   ```
-
-2. Créer un fichier `.env.local` à la racine avec :
-
-   ```bash
-   AIRTABLE_TOKEN=          # Personal Access Token Airtable (scopes data.records:read/write, schema.bases:write)
-   AIRTABLE_BASE_ID=        # ID de la base Airtable (commence par "app")
-   APP_PASSWORD=            # mot de passe pour protéger la création/modification/suppression
-   ```
-
-3. Lancer le serveur de développement :
-
-   ```bash
-   npm run dev
-   ```
-
-   L'application est disponible sur [http://localhost:3000](http://localhost:3000).
-
-## Structure de la base Airtable
-
-- **Categories** : `Nom`
-- **Ingredients** : `Nom`
-- **Recettes** : `Nom`, `Photo`, `Categorie` (lien), `Description`, `TempsPreparation`, `TempsCuisson`, `Portions`, `Difficulte`, `Instructions`
-- **RecetteIngredients** (table de liaison) : `Recette` (lien), `Ingredient` (lien), `Quantite`, `Unite`
-
-## Scripts
-
-- `npm run dev` — serveur de développement
-- `npm run build` — build de production
-- `npm run lint` — vérification ESLint
+Next.js (App Router) + TypeScript + Tailwind CSS, connecté directement à l'API REST d'Airtable (sans SDK). Détails complets dans [`doc/03-architecture.md`](doc/03-architecture.md).
